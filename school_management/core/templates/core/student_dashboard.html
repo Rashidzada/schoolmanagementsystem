@@ -1,0 +1,99 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="dashboard-stats">
+    <h2>Welcome, {{ student.user.first_name }}!</h2>
+    <p>Roll Number: {{ student.roll_number }}</p>
+    <p>Class: {{ student.class_enrolled.name }} - {{ student.class_enrolled.section }}</p>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4>Your Subjects</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    {% for subject in subjects %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            {{ subject.name }}
+                            <span class="badge bg-primary rounded-pill">{{ subject.code }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4>Recent Results</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Exam Type</th>
+                                <th>Marks</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for result in results %}
+                                <tr>
+                                    <td>{{ result.subject.name }}</td>
+                                    <td>{{ result.exam_type }}</td>
+                                    <td>{{ result.marks }}</td>
+                                    <td>{{ result.exam_date|date:"M d, Y" }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Attendance Overview</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Present Days</th>
+                                <th>Total Days</th>
+                                <th>Percentage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for subject in subjects %}
+                                {% with subject_attendance=attendance|dictsort:"subject" %}
+                                    <tr>
+                                        <td>{{ subject.name }}</td>
+                                        <td>{{ subject_attendance|length }}</td>
+                                        <td>{{ subject_attendance|length }}</td>
+                                        <td>
+                                            {% widthratio subject_attendance|length subject_attendance|length 100 %}%
+                                        </td>
+                                    </tr>
+                                {% endwith %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

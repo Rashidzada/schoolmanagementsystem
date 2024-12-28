@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h3 class="card-title text-warning mb-4">Profile Setup Required</h3>
+                    
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    
+                    <p class="lead">Your profile needs to be set up by an administrator before you can access the dashboard.</p>
+                    <p>Please contact the school administrator to complete your profile setup.</p>
+                    
+                    <div class="mt-4">
+                        <a href="{% url 'home' %}" class="btn btn-primary">Return to Home</a>
+                        <a href="{% url 'logout' %}" class="btn btn-outline-secondary ml-2">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

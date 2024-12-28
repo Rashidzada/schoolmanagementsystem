@@ -1,0 +1,63 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto text-center">
+        <h1 class="display-4 mb-4">Welcome to School Management System</h1>
+        <p class="lead mb-5">A comprehensive platform for students, teachers, and administrators.</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">For Students</h5>
+                <p class="card-text">Access your attendance, results, and class schedules all in one place.</p>
+                {% if not user.is_authenticated %}
+                    <a href="{% url 'login' %}" class="btn btn-primary">Student Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">For Teachers</h5>
+                <p class="card-text">Manage your classes, mark attendance, and upload results efficiently.</p>
+                {% if not user.is_authenticated %}
+                    <a href="{% url 'login' %}" class="btn btn-primary">Teacher Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">For Administrators</h5>
+                <p class="card-text">Oversee the entire school system and manage users effectively.</p>
+                {% if not user.is_authenticated %}
+                    <a href="{% url 'login' %}" class="btn btn-primary">Admin Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if announcements %}
+<div class="row mt-4">
+    <div class="col-12">
+        <h3>Latest Announcements</h3>
+        {% for announcement in announcements %}
+            <div class="announcement">
+                <h5>{{ announcement.title }}</h5>
+                <p>{{ announcement.content }}</p>
+                <small class="text-muted">Posted on {{ announcement.date_posted|date:"F d, Y" }}</small>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+{% endblock %}

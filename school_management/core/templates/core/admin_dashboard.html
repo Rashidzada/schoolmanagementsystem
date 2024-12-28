@@ -1,0 +1,89 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">Admin Dashboard</h2>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    
+                    <div class="mt-4">
+                        <h4>Quick Links</h4>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">User Management</h5>
+                                        <p class="card-text">Manage students, teachers, and staff accounts</p>
+                                        <a href="/admin/core/user/" class="btn btn-primary">Manage Users</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Class Management</h5>
+                                        <p class="card-text">Manage classes, sections, and assignments</p>
+                                        <a href="/admin/core/class/" class="btn btn-primary">Manage Classes</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Subject Management</h5>
+                                        <p class="card-text">Manage subjects and their assignments</p>
+                                        <a href="/admin/core/subject/" class="btn btn-primary">Manage Subjects</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Student Records</h5>
+                                        <p class="card-text">View and manage student information</p>
+                                        <a href="/admin/core/student/" class="btn btn-primary">View Records</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Results</h5>
+                                        <p class="card-text">Manage examination results</p>
+                                        <a href="/admin/core/result/" class="btn btn-primary">Manage Results</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Announcements</h5>
+                                        <p class="card-text">Post and manage announcements</p>
+                                        <a href="/admin/core/announcement/" class="btn btn-primary">Manage Announcements</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
